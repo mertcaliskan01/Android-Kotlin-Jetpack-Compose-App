@@ -103,4 +103,6 @@ dependencies {
     // swipe to refresh
     implementation "com.google.accompanist:accompanist-swiperefresh:0.24.2-alpha"
 
+    implementation "androidx.security:security-crypto:1.1.0-alpha02"
+
 }

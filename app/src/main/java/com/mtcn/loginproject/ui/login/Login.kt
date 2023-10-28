@@ -3,12 +3,22 @@ package com.mtcn.loginproject.ui.login
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -20,9 +30,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.mtcn.loginproject.R
 import com.mtcn.loginproject.navigation.Destination
-import com.mtcn.loginproject.ui.components.*
+import com.mtcn.loginproject.ui.components.BottomInfoTextSection
+import com.mtcn.loginproject.ui.components.CustomButton
+import com.mtcn.loginproject.ui.components.EmailOutTextField
+import com.mtcn.loginproject.ui.components.ErrorImageAuth
+import com.mtcn.loginproject.ui.components.ImageLogin
+import com.mtcn.loginproject.ui.components.PasswordOutTextField
+import com.mtcn.loginproject.ui.components.ProgressBarLoading
+import com.mtcn.loginproject.ui.components.SocialMediaIcons
+
 
 private var toast: Toast? = null
 
@@ -36,14 +56,55 @@ fun Login(
     imageError: Boolean
 ) {
     val context = LocalContext.current
+    LoginPage(navigation,modifier,loadingProgressBar,onclickLogin,dismissDialog,imageError, context)
+}
 
-    var email by rememberSaveable { mutableStateOf(value = "") }
-    var password by rememberSaveable { mutableStateOf(value = "") }
+@Composable
+fun LoginPage(
+    navigation: NavController,
+    modifier: Modifier = Modifier,
+    loadingProgressBar: Boolean,
+    onclickLogin: (email: String, password: String) -> Unit,
+    dismissDialog: () -> Unit,
+    imageError: Boolean,
+    context: Context
+) {
+
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+
     val isValidate by derivedStateOf { email.isNotBlank() && password.isNotBlank() }
     val focusManager = LocalFocusManager.current
 
+
+
+    // Initialize/open an instance of EncryptedSharedPreferences on below line.
+    val sharedPreferences = remember {
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        EncryptedSharedPreferences.create(
+            "preferences",
+            masterKeyAlias,
+            context,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
+
+    LaunchedEffect(Unit) {
+        val nameStr = sharedPreferences.getString("email", null)
+        val passwordStr = sharedPreferences.getString("password", null)
+
+        if (nameStr != null && passwordStr != null) {
+            email = nameStr
+            password = passwordStr
+        }
+    }
+
+
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -74,7 +135,29 @@ fun Login(
         Spacer(modifier = modifier.height(25.dp))
 
         CustomButton(
-            onclick = { onclickLogin(email, password) },
+            onclick = {
+                        // on below line we are setting data in our shared preferences.
+                        // creating a master key for encryption of shared preferences.
+                        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+
+                        // Initialize/open an instance of EncryptedSharedPreferences on below line.
+                        val sharedPreferences = EncryptedSharedPreferences.create(
+                            // passing a file name to share a preferences
+                            "preferences",
+                            masterKeyAlias,
+                            context,
+                            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                        )
+                        // on below line we are storing data in shared preferences file.
+                        sharedPreferences.edit().putString("email", email).apply()
+                        sharedPreferences.edit().putString("password", password).apply()
+                        // A toast is shown for user reference that the text is
+                        // copied to the clipboard
+                        Toast.makeText(context, "Saved Data.." + email + password, Toast.LENGTH_SHORT).show()
+
+                        onclickLogin(email, password)
+                      },
             "LOGIN",
             enabled = isValidate
         )
