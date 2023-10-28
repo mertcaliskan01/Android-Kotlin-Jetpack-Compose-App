@@ -1,0 +1,57 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#34A853"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/md_white_1000"
+            android:src="@drawable/app_features"
+            app:layout_constraintBottom_toTopOf="@+id/textView21"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Node.js API"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/font_h5_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:lineSpacingExtra="3dp"
+            android:text="Technologies \n\n Mongoose, Express, JWT, dotenv, bcryptjs, body-parser, cors, nodemon, and express-async-errors. \n\n github.com/mertcaliskan01/crudapp-nodejs-mongodb-todo-api \n\n developermert.site/api/swagger/"
+            android:textAlignment="center"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/font_title_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
