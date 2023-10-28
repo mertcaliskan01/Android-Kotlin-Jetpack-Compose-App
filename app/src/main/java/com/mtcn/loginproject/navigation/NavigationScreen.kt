@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mtcn.loginproject.ui.home.Home
+import com.mtcn.loginproject.ui.login.ForgotPassword
 import com.mtcn.loginproject.ui.login.Login
 import com.mtcn.loginproject.viewmodel.LoginViewModel
 import com.mtcn.loginproject.ui.login.Register
@@ -55,6 +56,16 @@ fun NavigationScreen(viewModel: LoginViewModel) {
                 navController,
                 loadingProgressBar = loadingProgressBar,
                 onClickRegister = viewModel::register,
+                dismissDialog = viewModel::dismissDialog,
+                imageError = imageError
+            )
+        }
+
+        composable(route = Destination.ForgotPassword.route) {
+            ForgotPassword(
+                navController,
+                loadingProgressBar = loadingProgressBar,
+                onClickForgotPassword = viewModel::onClickForgotPassword,
                 dismissDialog = viewModel::dismissDialog,
                 imageError = imageError
             )

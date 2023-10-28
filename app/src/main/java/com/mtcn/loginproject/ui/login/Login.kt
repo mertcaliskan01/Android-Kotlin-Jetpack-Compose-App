@@ -109,7 +109,7 @@ fun LoginPage(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Spacer(modifier = modifier.height(15.dp))
+        Spacer(modifier = modifier.height(20.dp))
 
         ImageLogin(painter = painterResource(id = R.drawable.user))
 
@@ -166,8 +166,8 @@ fun LoginPage(
 
         ForgotPassword(
             onclick = {
-                showToastMessage(context, "Forgot Password Clicked")
-            },
+                navigation.navigate(Destination.ForgotPassword.route)
+                      },
             "Forgot Password?"
         )
 

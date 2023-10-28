@@ -4,36 +4,46 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.*
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mtcn.loginproject.R
 import com.mtcn.loginproject.navigation.Destination
-import com.mtcn.loginproject.ui.components.*
-
+import com.mtcn.loginproject.ui.components.BottomInfoTextSection
+import com.mtcn.loginproject.ui.components.CustomButton
+import com.mtcn.loginproject.ui.components.EmailOutTextField
+import com.mtcn.loginproject.ui.components.ErrorImageAuth
+import com.mtcn.loginproject.ui.components.ImageLogin
+import com.mtcn.loginproject.ui.components.ProgressBarLoading
 @Composable
-fun Register(
+fun ForgotPassword(
     navigation: NavController,
     modifier: Modifier = Modifier,
     loadingProgressBar: Boolean,
-    onClickRegister: (firstName: String, lastName: String, email: String, password: String) -> Unit,
+    onClickForgotPassword: (email: String) -> Unit,
     dismissDialog: () -> Unit,
     imageError: Boolean
 ) {
 
-    var firstName by rememberSaveable { mutableStateOf(value = "") }
-    var lastName by rememberSaveable { mutableStateOf(value = "") }
+
     var email by rememberSaveable { mutableStateOf(value = "") }
-    var password by rememberSaveable { mutableStateOf(value = "") }
-    val isValidate by derivedStateOf { firstName.isNotBlank() && lastName.isNotBlank() && email.isNotBlank() && password.isNotBlank() }
+
+    val isValidate by derivedStateOf { email.isNotBlank() }
     val focusManager = LocalFocusManager.current
 
     Column(
@@ -44,29 +54,15 @@ fun Register(
 
         Spacer(modifier = modifier.height(20.dp))
 
-        ImageLogin(painter = painterResource(id = R.drawable.group))
+        ImageLogin(painter = painterResource(id = R.drawable.forgot_password))
 
         Spacer(modifier = modifier.height(15.dp))
 
-        NameOutTextField(
-            "First Name",
-            textValue = firstName,
-            onValueChange = { firstName = it },
-            onClickButton = { firstName = "" },
-            onNext = { focusManager.moveFocus(FocusDirection.Down) }
+        Text(
+            text = "Trouble logging in?",
+            fontSize = 24.sp,
+            modifier = Modifier.padding(16.dp)
         )
-
-        Spacer(modifier = modifier.height(15.dp))
-
-        NameOutTextField(
-            "Last Name",
-            textValue = lastName,
-            onValueChange = { lastName = it },
-            onClickButton = { lastName = "" },
-            onNext = { focusManager.moveFocus(FocusDirection.Down) }
-        )
-
-        Spacer(modifier = modifier.height(15.dp))
 
         EmailOutTextField(
             textValue = email,
@@ -75,20 +71,10 @@ fun Register(
             onNext = { focusManager.moveFocus(FocusDirection.Down) }
         )
 
-        Spacer(modifier = modifier.height(15.dp))
-
-        PasswordOutTextField(
-            textValue = password,
-            onValueChange = { password = it },
-            onDone = {
-                focusManager.clearFocus()
-            }
-        )
-
         Spacer(modifier = modifier.height(25.dp))
 
         CustomButton(
-            onclick = { onClickRegister(firstName, lastName, email, password) },
+            onclick = { onClickForgotPassword(email) },
             "REGISTER",
             enabled = isValidate
         )
@@ -100,8 +86,8 @@ fun Register(
             onclick = {
                 navigation.navigate(Destination.Login.route)
             },
-            "Already have an account?",
-            "Login"
+            "",
+            "Back to login"
         )
     }
 

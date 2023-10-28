@@ -56,6 +56,16 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
+    fun onClickForgotPassword(email: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                Log.d("Logging", "Error Authentication")
+
+            } catch (e: Exception) {
+                Log.d("Logging", "Error Authentication", e)
+            }
+        }
+    }
     fun dismissDialog() {
         imageErrorAuth.value = false
     }
