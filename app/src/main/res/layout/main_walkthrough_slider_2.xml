@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4285F4">
+    android:background="@color/md_deep_orange_400">
 
         <ImageView
             android:id="@+id/imageView11"
@@ -21,16 +21,15 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Vue.js Web App"
+            android:text="𝓜"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/font_h5_size"
-            android:textStyle="bold"
+            android:textSize="@dimen/font_h1_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,10 +43,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:lineSpacingExtra="3dp"
-            android:text="Technologies \n\n  Vuejs, CSS-Sass, Vuex for State Management, Vue Router, Bootstrap, Axios HTTP Client, vee-validate, Yup Schema Builder \n\n github.com/mertcaliskan01/crudapp-vue-todo-list \n\n  developermert.site"
+            android:text="★★★☆☆"
             android:textAlignment="center"
             android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/font_title_size"
+            android:textSize="@dimen/font_h4_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />

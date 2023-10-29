@@ -2,8 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#34A853"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/md_red_500">
 
 
         <ImageView
@@ -22,16 +21,15 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Node.js API"
+            android:text="𝓜"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/font_h5_size"
-            android:textStyle="bold"
+            android:textSize="@dimen/font_h1_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,10 +43,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:lineSpacingExtra="3dp"
-            android:text="Technologies \n\n Mongoose, Express, JWT, dotenv, bcryptjs, body-parser, cors, nodemon, and express-async-errors. \n\n github.com/mertcaliskan01/crudapp-nodejs-mongodb-todo-api \n\n developermert.site/api/swagger/"
+            android:text="★☆☆☆☆"
             android:textAlignment="center"
             android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/font_title_size"
+            android:textSize="@dimen/font_h4_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
