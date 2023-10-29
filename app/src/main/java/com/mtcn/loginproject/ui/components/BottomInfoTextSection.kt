@@ -26,26 +26,30 @@ fun BottomInfoTextSection(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = normalText,
-                style = TextStyle(
-                    fontSize = 12.sp
-                ),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .clickable { /* Handle new user click */ }
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = boldText,
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                ),
-                modifier = Modifier.clickable {
-                    onclick() // Invoke the onclick lambda when clicked
-                }
-            )
+            if (normalText.isNotBlank()){
+                Text(
+                    text = normalText,
+                    style = TextStyle(
+                        fontSize = 12.sp
+                    ),
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .clickable { /* Handle new user click */ }
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+            if(boldText.isNotBlank()){
+                Text(
+                    text = boldText,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier.clickable {
+                        onclick() // Invoke the onclick lambda when clicked
+                    }
+                )
+            }
         }
 
     }

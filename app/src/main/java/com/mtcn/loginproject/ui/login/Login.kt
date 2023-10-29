@@ -154,7 +154,6 @@ fun LoginPage(
                         sharedPreferences.edit().putString("password", password).apply()
                         // A toast is shown for user reference that the text is
                         // copied to the clipboard
-                        Toast.makeText(context, "Saved Data.." + email + password, Toast.LENGTH_SHORT).show()
 
                         onclickLogin(email, password)
                       },
